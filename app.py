@@ -9,10 +9,10 @@ import numpy as np
 st.set_page_config(page_title = "Amazon Webscraper")
 
 
-desc = "This web app detects fake news written in the English Language.\
-        You can either enter the URL of a news article, paste the text directly or just use our Chrome Extension.\
-        This app was developed with the Streamlit and Spacy Python libraries.\
-        This app is modeled and created using the formula and dataset training from (https://github.com/derevirn/gfn-detector).\
+desc = "Webscrape Amazon through Product URL or Amazon Search\
+        You can either enter the Product URL or just search Amazon through here.\
+        This app was developed with Streamlit and Selenium for the webapp and scraping features\
+        Check out our github repository! (https://github.com/gnsslrrcs/dlsud-cpse325-2021/tree/major-exam/scraping/Amazon).\
         "
 
 st.title("Jopak's Angels' Amazon Webscraper")
