@@ -45,10 +45,10 @@ def load_searchdata():
     st.dataframe(df)
     status_text.text('Done!')
 
-    csv = df.to_csv(index=False)
+    csv = df.to_csv(index=True)
     b64 = base64.b64encode(csv.encode()).decode()
-    st.markdown('### **⬇️ Download output CSV File **')
-    href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a> (right-click and save as ".csv")'
+    st.markdown('### **⬇️ Download CSV File **')
+    href = f'<a href="data:file/csv;base64,{b64}" download="amazon_search.csv">Amazon Search Results</a>'
     st.markdown(href, unsafe_allow_html=True)
 
 

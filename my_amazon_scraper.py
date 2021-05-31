@@ -56,7 +56,7 @@ def amazon_search(query):
 
 
             # location = item.find_element_by_xpath('.//span[@class="c2i43- "]').get_attribute('innerText')
-            #link = item.find_element_by_xpath('.//*[@class="c16H9d"]//a[contains(@age, "0")]').get_attribute('innerHTML')
+            # link = item.find_element_by_xpath('.//*[@class="c16H9d"]//a[contains(@age, "0")]').get_attribute('innerHTML')
             # title = item.find_element_by_xpath('.//*[@class="s-main-slot s-result-list s-search-results sg-row"]//data-asin//class//span//span//class//[contains(@class, "a-size-base-plus a-color-base a-text-normal")]').get_attribute('innerText')
             # print(location)
             # print(link)
