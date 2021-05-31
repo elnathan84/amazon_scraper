@@ -12,7 +12,7 @@ def amazon_search(query):
     op.add_argument('headless')
     driver = webdriver.Chrome(options=op)
     # driver = webdriver.Chrome()
-    driver.maximize_window()
+    # driver.maximize_window()
     driver.get("https://www.amazon.com/")
     search_box = driver.find_element_by_id('twotabsearchtextbox')
     search_box.send_keys(query)
