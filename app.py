@@ -4,7 +4,7 @@ import numpy as np
 from my_amazon_scraper import amazon_search, search_dict
 import pandas as pd
 import time
-
+import base64
 
 #Webapp
 st.set_page_config(page_title = "Amazon Webscraper")
@@ -34,7 +34,7 @@ def load_searchdata():
         status_text.text('Loading')
 
         # Doing computation, wink wink
-        time.sleep(0.1)
+        time.sleep(0.01)
 
         while i == 4:
             amazon_search(text)
@@ -44,6 +44,12 @@ def load_searchdata():
     st.balloons()
     st.dataframe(df)
     status_text.text('Done!')
+
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()
+    st.markdown('### **⬇️ Download output CSV File **')
+    href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a> (right-click and save as ".csv")'
+    st.markdown(href, unsafe_allow_html=True)
 
 
 if select_input == "Product URL":

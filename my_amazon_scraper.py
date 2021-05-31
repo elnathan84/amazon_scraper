@@ -4,9 +4,13 @@ from selenium.webdriver.common.keys import Keys
 import csv
 import numpy as np
 
-search_dict = {"Product Name": [], "Original Price": [], "Price": []};
+search_dict = {"Product Name": [], "Price": [], "Discounted Price": []};
+
 
 def amazon_search(query):
+    op = webdriver.ChromeOptions()
+    # op.add_argument('headless')
+    # driver = webdriver.Chrome(options=op)
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get("https://www.amazon.com/")
@@ -37,18 +41,18 @@ def amazon_search(query):
                     # Adds Original Price
                     o_price = item.find_element_by_xpath('.//span[@class="a-price a-text-price"]//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(o_price)
-                    search_dict.setdefault("Original Price", []).append(o_price)
+                    search_dict.setdefault("Price", []).append(o_price)
                 except:
                     print('No discount')
-                    search_dict.setdefault("Original Price", []).append("No discount")
+                    search_dict.setdefault("Price", []).append("No discount")
                 try:
                     # Adds Current Price
                     c_price = item.find_element_by_xpath('.//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(c_price)
-                    search_dict.setdefault("Price", []).append(c_price)
+                    search_dict.setdefault("Discounted Price", []).append(c_price)
                 except:
                     print('Product on exclusive pricing')
-                    search_dict.setdefault("Price", []).append("Product on exclusive pricing")
+                    search_dict.setdefault("Discounted Price", []).append("Product on exclusive pricing")
 
 
             # location = item.find_element_by_xpath('.//span[@class="c2i43- "]').get_attribute('innerText')
