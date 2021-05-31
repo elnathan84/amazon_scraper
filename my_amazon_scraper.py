@@ -8,11 +8,11 @@ search_dict = {"Product Name": [], "Price": [], "Discounted Price": []};
 
 
 def amazon_search(query):
-    # op = webdriver.ChromeOptions()
-    # op.add_argument('headless')
-    # driver = webdriver.Chrome(options=op)
-    driver = webdriver.Chrome('chromedriver.exe')
-    driver.maximize_window()
+    op = webdriver.ChromeOptions()
+    op.add_argument('headless')
+    driver = webdriver.Chrome('chromedriver.exe', options=op)
+    # driver = webdriver.Chrome()
+    # driver.maximize_window()
     driver.get("https://www.amazon.com/")
     search_box = driver.find_element_by_id('twotabsearchtextbox')
     search_box.send_keys(query)
