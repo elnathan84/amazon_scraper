@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import csv
 import numpy as np
 
+search_dict = {"Product Name": [], "Original Price": [], "Price": []};
 
 def amazon_search(query):
     driver = webdriver.Chrome()
@@ -15,29 +16,39 @@ def amazon_search(query):
     sleep(5)
     dup_check = ""
     result = driver.find_elements_by_xpath('//*[@class="sg-col-inner"]')
-    # print(result)
+
     for item in result[3:]:
         try:
+            # checks the search result output
             try:
                 title = item.find_element_by_xpath('.//span[contains(@class, "a-size-medium a-color-base a-text-normal")]').get_attribute('innerText')
             except:
                 title = item.find_element_by_xpath('.//span[contains(@class, "a-size-base-plus a-color-base a-text-normal")]').get_attribute('innerText')
 
-            # print(title)
+            # checks for duplicates
             if title == dup_check:
                 print('')
             else:
+                # Adds Product Name
                 print(title)
+                search_dict.setdefault("Product Name", []).append(title)
+
                 try:
+                    # Adds Original Price
                     o_price = item.find_element_by_xpath('.//span[@class="a-price a-text-price"]//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(o_price)
+                    search_dict.setdefault("Original Price", []).append(o_price)
                 except:
                     print('No discount')
+                    search_dict.setdefault("Original Price", []).append("No discount")
                 try:
+                    # Adds Current Price
                     c_price = item.find_element_by_xpath('.//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(c_price)
+                    search_dict.setdefault("Price", []).append(c_price)
                 except:
                     print('Product on exclusive pricing')
+                    search_dict.setdefault("Price", []).append("Product on exclusive pricing")
 
 
             # location = item.find_element_by_xpath('.//span[@class="c2i43- "]').get_attribute('innerText')

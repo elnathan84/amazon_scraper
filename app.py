@@ -1,11 +1,13 @@
 import streamlit as st
 import csv
 import numpy as np
-from my_amazon_scraper import amazon_search
+from my_amazon_scraper import amazon_search, search_dict
+import pandas as pd
+import time
+
 
 #Webapp
 st.set_page_config(page_title = "Amazon Webscraper")
-
 
 desc = "Webscrape Amazon through Product URL or Amazon Search\
         You can either enter the Product URL or just search Amazon through here.\
@@ -19,6 +21,31 @@ st.markdown(desc)
 st.subheader("Select the option")
 select_input = st.radio("Select Input:", ["Product URL", "Search Amazon"])
 
+
+def load_searchdata():
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+
+    for i in range(100):
+        # Update progress bar.
+        progress_bar.progress(i + 1)
+
+        # Update status text.
+        status_text.text('Loading')
+
+        # Doing computation, wink wink
+        time.sleep(0.1)
+
+        while i == 4:
+            amazon_search(text)
+            df = pd.DataFrame(search_dict)
+            progress_bar.progress(i + 1)
+            i += 1
+    st.balloons()
+    st.dataframe(df)
+    status_text.text('Done!')
+
+
 if select_input == "Product URL":
     url = st.text_input("URL")
     if st.button("Scrape It!"):
@@ -30,5 +57,9 @@ else:
     text = st.text_area("Search Amazon")
     if st.button("Scrape It!"):
         # print("")
-        amazon_search(text)
+        load_searchdata()
         # generate_output(text)
+
+
+
+
