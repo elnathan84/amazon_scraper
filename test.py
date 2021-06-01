@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-search_dict = {"Product Name": [], "Price": [], "Discounted Price":[],
+search_dict = {"Product Name": [], "Price": [], "Previous Price":[],
                "Rating": [], "Shipping": [], "Stock": [], "Coupon": []};
 
 
@@ -42,20 +42,20 @@ def amazon_search(query):
 
                     c_price = item.find_element_by_xpath('.//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(c_price)
-                    search_dict.setdefault("Discounted Price", []).append(c_price)
+                    search_dict.setdefault("Price", []).append(c_price)
                 except:
                     print('Product on exclusive pricing')
-                    search_dict.setdefault("Discounted Price", []).append("Product on exclusive pricing")
+                    search_dict.setdefault("Price", []).append("Product on exclusive pricing")
 
                 # Adds Original Price
                 try:
 
                     o_price = item.find_element_by_xpath('.//span[@class="a-price a-text-price"]//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(o_price)
-                    search_dict.setdefault("Price", []).append(o_price)
+                    search_dict.setdefault("Previous Price", []).append(o_price)
                 except:
                     print('No discount')
-                    search_dict.setdefault("Price", []).append(c_price)
+                    search_dict.setdefault("Previous Price", []).append(c_price)
 
 
                 # Rating

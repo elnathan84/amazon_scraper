@@ -38,7 +38,9 @@ def load_searchdata():
 
         while i == 50:
             amazon_search(text)
-            df = pd.DataFrame(search_dict)
+            df = pd.DataFrame.from_dict(search_dict)
+            # df = df.drop(df.index[7])
+            # dfr = df.reset_index(drop=True)
             progress_bar.progress(i + 1)
             i += 1
     st.balloons()
@@ -64,6 +66,7 @@ else:
     if st.button("Scrape It!"):
         # print("")
         load_searchdata()
+
         # generate_output(text)
 
 
