@@ -18,23 +18,29 @@ For terminal installation
 
     go get -t -d https://github.com/elnathan84/amazon_scraper.git
     
-It is important to install the chromedriver and the other packages needed for the program.
-[Chromedriver](https://chromedriver.chromium.org/downloads)
+It is important to install the [Chromedriver](https://chromedriver.chromium.org/downloads) and the other packages needed for the program.
+
 ### Instructions
-To get the app running type in the terminal
+To get the app running type in the terminal:
   
     streamlit run app.py
-You can choose 3 options to scrape data in Amazon
+You can choose three options to scrape data in Amazon:
 
-![Options](https://user-images.githubusercontent.com/66759228/120328167-28265200-c31d-11eb-92fb-b7bb05cbe2b1.PNG)
+![Options](https://user-images.githubusercontent.com/66759228/120329894-e0082f00-c31e-11eb-874c-53773c429e93.PNG)
 
-Product URL: Input your desired URL.
 
-Search Amazon: Input your desired product.
+* Product URL: Input your desired URL.
 
-Amazon Top Seller: Input your desired product and it will output a best selling product for you.
+* Search Amazon: Input your desired product.
+
+![URL](https://user-images.githubusercontent.com/66759228/120331018-f19e0680-c31f-11eb-8a24-6f41966478a3.PNG)
+
+* Amazon Today's Deal: Outputs the current deal in the amazon list.
+
+<img src="https://user-images.githubusercontent.com/66759228/120331124-0a0e2100-c320-11eb-8c32-2a11e754e44b.PNG">
 
 ## Column/Data key Definition
+The output of the scrapping and its definitions:
 | Column/Key Name | Product Name | Price | Previous Price | Rating | Shipping | Stock | Coupon |
 | --- | --- | --- | --- | --- | --- | --- | --- | 
-| Definition | desc | desc | desc | desc | desc | desc | desc | 
+| Definition | Outputs the user search results | Shows the current price | Shows the previous price | Shows the rating of the product | Shows if its available to be shipped in the Philippines | Number of stocks for the product | Shows if there's an available coupon | 
