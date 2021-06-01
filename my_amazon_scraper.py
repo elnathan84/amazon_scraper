@@ -1,18 +1,17 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import csv
-import numpy as np
 
-search_dict = {"Product Name": [], "Price": [], "Discounted Price": []};
+
+search_dict = {"Product Name": [], "Price": [], "Discounted Price": [], "Rating": []};
 
 
 def amazon_search(query):
-    op = webdriver.ChromeOptions()
-    op.add_argument('headless')
-    driver = webdriver.Chrome(options=op)
-    # driver = webdriver.Chrome()
-    # driver.maximize_window()
+    # op = webdriver.ChromeOptions()
+    # op.add_argument('headless')
+    # driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome()
+    driver.maximize_window()
     driver.get("https://www.amazon.com/")
     search_box = driver.find_element_by_id('twotabsearchtextbox')
     search_box.send_keys(query)
@@ -37,16 +36,9 @@ def amazon_search(query):
                 print(title)
                 search_dict.setdefault("Product Name", []).append(title)
 
+                # Adds Current Price
                 try:
-                    # Adds Original Price
-                    o_price = item.find_element_by_xpath('.//span[@class="a-price a-text-price"]//span[@class="a-offscreen"]').get_attribute('innerText')
-                    print(o_price)
-                    search_dict.setdefault("Price", []).append(o_price)
-                except:
-                    print('No discount')
-                    search_dict.setdefault("Price", []).append("No discount")
-                try:
-                    # Adds Current Price
+
                     c_price = item.find_element_by_xpath('.//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(c_price)
                     search_dict.setdefault("Discounted Price", []).append(c_price)
@@ -54,13 +46,59 @@ def amazon_search(query):
                     print('Product on exclusive pricing')
                     search_dict.setdefault("Discounted Price", []).append("Product on exclusive pricing")
 
+                # Adds Original Price
+                try:
 
-            # location = item.find_element_by_xpath('.//span[@class="c2i43- "]').get_attribute('innerText')
-            # link = item.find_element_by_xpath('.//*[@class="c16H9d"]//a[contains(@age, "0")]').get_attribute('innerHTML')
-            # title = item.find_element_by_xpath('.//*[@class="s-main-slot s-result-list s-search-results sg-row"]//data-asin//class//span//span//class//[contains(@class, "a-size-base-plus a-color-base a-text-normal")]').get_attribute('innerText')
-            # print(location)
-            # print(link)
+                    o_price = item.find_element_by_xpath('.//span[@class="a-price a-text-price"]//span[@class="a-offscreen"]').get_attribute('innerText')
+                    print(o_price)
+                    search_dict.setdefault("Price", []).append(o_price)
+                except:
+                    print('No discount')
+                    search_dict.setdefault("Price", []).append(c_price)
+
+
+                # Rating
+                try:
+                    rating = item.find_element_by_xpath('.//span[@class="a-icon-alt"]').get_attribute('innerText')
+                    print(rating)
+                    search_dict.setdefault("Rating", []).append(rating)
+                except:
+                    print('No Rating')
+                    search_dict.setdefault("Rating", []).append("No Rating")
+
+                # Shipping
+                try:
+                    shipping = item.find_element_by_xpath('.//span[@class="a-size-small a-color-secondary"]').get_attribute('innerText')
+                    print(shipping)
+                    if 'Ships' in shipping:
+                        search_dict.setdefault("Shipping", []).append(shipping)
+                        loc_shipping = shipping
+                    else:
+                        search_dict.setdefault("Shipping", []).append(loc_shipping)
+                except:
+                    print('Shipping not Available')
+                    search_dict.setdefault("Shipping", []).append('Shipping Unavailable')
+                # Stock
+                try:
+                    stock = item.find_element_by_xpath('.//span[@class="a-size-small a-color-price"]').get_attribute('innerText')
+                    print(stock)
+                    search_dict.setdefault("Stock", []).append(stock)
+                except:
+                    print('In stock')
+                    search_dict.setdefault("Stock", []).append('In stock')
+                # Coupon
+                try:
+                    coupon = item.find_element_by_xpath('.//span[@class="a-size-base s-highlighted-text-padding aok-inline-block s-coupon-highlight-color"]').get_attribute('innerText')
+                    print(coupon + ' with coupon')
+                    search_dict.setdefault("Coupon", []).append(coupon + ' with coupon')
+                except:
+                    print('No coupon available')
+                    search_dict.setdefault("Coupon", []).append('No coupon available')
+
             print('')
             dup_check = title
         except:
-            print('')
+            print('error')
+
+    driver.close()
+    driver.quit()

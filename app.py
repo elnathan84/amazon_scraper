@@ -36,7 +36,7 @@ def load_searchdata():
         # Doing computation, wink wink
         time.sleep(0.01)
 
-        while i == 4:
+        while i == 50:
             amazon_search(text)
             df = pd.DataFrame(search_dict)
             progress_bar.progress(i + 1)
