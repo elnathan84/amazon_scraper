@@ -3,15 +3,15 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import pandas as pd
 
-search_dict = {"Product Name": [], "Price": [], "Previous Price": [], "Rating": [], "Shipping": [], "Stock": [], "Coupon": []};
+search_dict = {"Product Name": [], "Discounted Price": [], "Previous Price": [], "Rating": [], "Shipping": [], "Stock": [], "Coupon": []};
 
 
 def amazon_search(query):
-    # op = webdriver.ChromeOptions()
-    # op.add_argument('headless')
-    # driver = webdriver.Chrome(options=op)
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    op = webdriver.ChromeOptions()
+    op.add_argument('headless')
+    driver = webdriver.Chrome(options=op)
+    # driver = webdriver.Chrome()
+    # driver.maximize_window()
     driver.get("https://www.amazon.com/")
     search_box = driver.find_element_by_id('twotabsearchtextbox')
     search_box.send_keys(query)
@@ -41,10 +41,10 @@ def amazon_search(query):
 
                     c_price = item.find_element_by_xpath('.//span[@class="a-offscreen"]').get_attribute('innerText')
                     print(c_price)
-                    search_dict.setdefault("Price", []).append(c_price)
+                    search_dict.setdefault("Discounted Price", []).append(c_price)
                 except:
                     print('Product on exclusive pricing')
-                    search_dict.setdefault("Price", []).append("Product on exclusive pricing")
+                    search_dict.setdefault("Discounted Price", []).append("Product on exclusive pricing")
 
                 # Adds Original Price
                 try:
