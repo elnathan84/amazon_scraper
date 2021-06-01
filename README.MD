@@ -6,6 +6,9 @@ Webscrape Amazon through Amazon Search, Product URL, or Best Selling Products
 | --- | --- | --- | --- | --- | --- | --- | --- | 
 | Definition | desc | desc | desc | desc | desc | desc | desc | 
 
+## Instructions
+put instruction here....
+
 ## Web Application
 This application is running through streamlit web platfrom
 [Amazon Webscraper](https://streamlit.io/)
