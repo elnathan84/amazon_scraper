@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import pandas as pd
 
-search_dict = {"Product Name": [], "Price": [], "Previous Price": [], "Rating": []};
+search_dict = {"Product Name": [], "Price": [], "Previous Price": [], "Rating": [], "Shipping": [], "Stock": [], "Coupon": []};
 
 
 def amazon_search(query):
