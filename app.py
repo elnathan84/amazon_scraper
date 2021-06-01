@@ -53,7 +53,7 @@ st.title("Amazon Webscraper")
 st.header("By Jopak's Angels")
 st.markdown(desc)
 st.subheader("Scraping Menu")
-select_input = st.radio("Select Input:", ["Product URL", "Search Amazon", "Amazon Top Sellers"])
+select_input = st.radio("Select Input:", ["Product URL", "Search Amazon", "Amazon Today's Deals"])
 
 
 
@@ -62,7 +62,7 @@ if select_input == "Product URL":
     if st.button("Scrape It!"):
         print("")
         # placeholder(text)
-elif select_input == "Amazon Top Sellers":
+elif select_input == "Amazon Today's Deals":
     st.button('Show Me!')
 
 else:
