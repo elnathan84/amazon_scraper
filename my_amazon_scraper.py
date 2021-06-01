@@ -103,3 +103,6 @@ def amazon_search(query):
             print('error')
     # driver.close()
     # driver.quit()
+
+def amazon_specific():
+    None
