@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 import pandas as pd
 
 search_dict = {"Product Name": [], "Discounted Price": [], "Previous Price": [], "Rating": [], "Shipping": [], "Stock": [], "Coupon": []};
+specific_dict = {"Product Name": [], "Rating": [], "Price": [], "Seller": [], "Availability": [], "Shipping": [], "Other Information":[]};
+picture = []
 
 
 def amazon_search(query):
@@ -90,7 +92,7 @@ def amazon_search(query):
                     search_dict.setdefault("Stock", []).append('In stock')
                 # Coupon
                 try:
-                    coupon = item.find_element_by_xpath('.//span[@class="a-size-base s-highlighted-text-padding aok-inline-block s-coupon-highlight-color"]').get_attribute('innerText')
+                    coupon = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-base a-text-beside-button a-text-bold"]').get_attribute('innerText')
                     print(coupon + ' with coupon')
                     search_dict.setdefault("Coupon", []).append(coupon + ' with coupon')
                 except:
@@ -104,5 +106,90 @@ def amazon_search(query):
     # driver.close()
     # driver.quit()
 
-def amazon_specific():
-    None
+def amazon_specific(url):
+    # op = webdriver.ChromeOptions()
+    # op.add_argument('headless')
+    # driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.get(url)
+    sleep(5)
+    result = driver.find_elements_by_xpath('//*[@class="a-container"]')
+    for item in result:
+        try:
+            # Product title
+            title = item.find_element_by_xpath('.//span[contains(@class, "a-size-large product-title-word-break")]').get_attribute('innerText')
+            specific_dict.setdefault("Product Name", []).append(title)
+            print(title)
+
+            # Rating
+            try:
+                rating = item.find_element_by_xpath('.//span[@class="a-icon-alt"]').get_attribute('innerText')
+                print(rating)
+                specific_dict.setdefault("Rating", []).append(rating)
+            except:
+                print('No Rating')
+                specific_dict.setdefault("Rating", []).append('Rating not available')
+            # Pricing
+            try:
+                price = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-price"]').get_attribute('innerText')
+                print(price)
+                specific_dict.setdefault("Price", []).append(price)
+            except:
+                print('Price not available')
+                specific_dict.setdefault("Price", []).append('Price not available')
+            # Seller
+            try:
+                seller = item.find_element_by_xpath('.//a[@id="sellerProfileTriggerId"]').get_attribute('innerText')
+                print("Sold by: " + seller)
+                specific_dict.setdefault("Seller", []).append(seller)
+            except:
+                print('Seller data not available')
+                specific_dict.setdefault("Seller", []).append('Seller data not available')
+            # Availability
+            try:
+                try:
+                    availability = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-success"]').get_attribute('innerText')
+                except:
+                    availability = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-state"]').get_attribute('innerText')
+                print(availability)
+                specific_dict.setdefault("Availability", []).append(availability)
+            except:
+                print('Out of Stock')
+                specific_dict.setdefault("Availability", []).append('Out of Stock')
+            # Image
+            try:
+                image = item.find_element_by_xpath('.//div[@class="imgTagWrapper"]//img').get_attribute('src')
+                print(image)
+                picture.append(image)
+            except:
+                print('Cannot retrieve image')
+                picture.append('Cannot retrieve image')
+
+            # Shipping
+            try:
+                shipping = item.find_element_by_xpath('.//div[@id="exports_desktop_qualifiedBuybox_tlc_feature_div"]//span').get_attribute('innerText')
+                print(shipping)
+                specific_dict.setdefault("Shipping", []).append(shipping)
+            except:
+                print('Shipping not available')
+                specific_dict.setdefault("Shipping", []).append('Shipping not available')
+
+            # Other Info
+            try:
+                type = item.find_element_by_xpath('.//div[@class="a-row"]//label').get_attribute('innerText')
+                type_sub = item.find_element_by_xpath('.//div[@class="a-row"]//span[@class="selection"]').get_attribute('innerText')
+                print(type + type_sub)
+                info = type + type_sub
+                specific_dict.setdefault("Other Information", []).append(info)
+            except:
+                print('Shipping not available')
+                specific_dict.setdefault("Other Information", []).append('Shipping not available')
+
+            print('')
+
+        except:
+            print('error')
+
+    # driver.close()
+    # driver.quit()

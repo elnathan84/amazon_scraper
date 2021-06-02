@@ -40,7 +40,12 @@ You can choose three options to scrape data in Amazon:
 <img src="https://user-images.githubusercontent.com/66759228/120331124-0a0e2100-c320-11eb-8c32-2a11e754e44b.PNG">
 
 ## Column/Data key Definition
-The output of the scrapping and its definitions:
+The output of the Amazon search scraper and its definitions:
 | Column/Key Name | Product Name | Price | Previous Price | Rating | Shipping | Stock | Coupon |
 | --- | --- | --- | --- | --- | --- | --- | --- | 
-| Definition | Outputs the user search results | Shows the current price | Shows the previous price | Shows the rating of the product | Shows if its available to be shipped in the Philippines | Number of stocks for the product | Shows if there's an available coupon | 
+| Definition | Outputs the user search results | Shows the current price | Shows the previous price | Shows the rating of the product | Shows if its available to be shipped in current location | Number of stocks for the product | Shows if there's an available coupon | 
+
+The output of the Amazon product URL scraper and its definitions:
+| Column/Key Name | Product Name | Rating | Price | Seller | Availability | Shipping | Other Information |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Definition | Outputs the Product name | Shows the rating | Shows the price | Shows who is the seller of the product | Shows the stock information  | Shows if the shipping information and location | Shows other related information | 
