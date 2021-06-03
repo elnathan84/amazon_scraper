@@ -12,7 +12,7 @@ picture = []
 def amazon_search(query):
     op = webdriver.ChromeOptions()
     op.add_argument('headless')
-    driver = webdriver.Chrome(options=op)
+    driver = webdriver.Remote(options=op)
     # driver = webdriver.Chrome()
     # driver.maximize_window()
     driver.get("https://www.amazon.com/")
