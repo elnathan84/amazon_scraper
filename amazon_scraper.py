@@ -10,11 +10,11 @@ picture = []
 
 
 def amazon_search(query):
-    # op = webdriver.ChromeOptions()
-    # op.add_argument('headless')
-    # driver = webdriver.Chrome(options=op)
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    op = webdriver.ChromeOptions()
+    op.add_argument('headless')
+    driver = webdriver.Chrome(options=op)
+    # driver = webdriver.Chrome()
+    # driver.maximize_window()
     driver.get("https://www.amazon.com/")
     search_box = driver.find_element_by_id('twotabsearchtextbox')
     search_box.send_keys(query)
@@ -108,11 +108,11 @@ def amazon_search(query):
     # driver.quit()
 
 def amazon_specific(url):
-    # op = webdriver.ChromeOptions()
-    # op.add_argument('headless')
-    # driver = webdriver.Chrome(options=op)
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    op = webdriver.ChromeOptions()
+    op.add_argument('headless')
+    driver = webdriver.Chrome(options=op)
+    # driver = webdriver.Chrome()
+    # driver.maximize_window()
     driver.get(url)
     sleep(5)
     result = driver.find_elements_by_xpath('//*[@class="a-container"]')
@@ -196,11 +196,11 @@ def amazon_specific(url):
     # driver.quit()
 
 def amazon_deals():
-    # op = webdriver.ChromeOptions()
-    # op.add_argument('headless')
-    # driver = webdriver.Chrome(options=op)
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    op = webdriver.ChromeOptions()
+    op.add_argument('headless')
+    driver = webdriver.Chrome(options=op)
+    # driver = webdriver.Chrome()
+    # driver.maximize_window()
     driver.get('https://www.amazon.com')
     search_box = driver.find_element_by_xpath('//*[@id="nav-xshop"]/a[1]')
     search_box.send_keys(Keys.ENTER)
