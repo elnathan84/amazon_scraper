@@ -49,3 +49,8 @@ The output of the Amazon product URL scraper and its definitions:
 | Column/Key Name | Product Name | Rating | Price | Seller | Availability | Shipping | Other Information |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Definition | Outputs the Product name | Shows the rating | Shows the price | Shows who is the seller of the product | Shows the stock information  | Shows if the shipping information and location | Shows other related information | 
+
+The output of the Amazon Today's Deals scraper and its definitions:
+| Column/Key Name | Product | Price | Time Left | Number of Ratings | Deal Type | 
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Definition | Outputs the Product name | Shows the range of price of the product | Shows how much time is left before end of the deal | Shows how many users rated the product | Shows what type of Amazon Deal is the product  | 
