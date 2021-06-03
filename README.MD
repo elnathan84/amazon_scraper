@@ -32,13 +32,15 @@ You can choose three options to scrape data in Amazon:
 ![Options](https://user-images.githubusercontent.com/66759228/120329894-e0082f00-c31e-11eb-874c-53773c429e93.PNG)
 
 
-* Product URL: Input your desired URL.
-
-* Search Amazon: Input your desired product.
+* **Product URL: Input your desired URL.**
 
 ![URL](https://user-images.githubusercontent.com/66759228/120331018-f19e0680-c31f-11eb-8a24-6f41966478a3.PNG)
 
-* Amazon Today's Deal: Outputs the current deal in the amazon list.
+* **Search Amazon: Input your desired product.**
+
+![image](https://user-images.githubusercontent.com/66759228/120609458-c4b73400-c484-11eb-8ebe-bf18d0060bc8.png)
+
+* **Amazon Today's Deal: Outputs the current deal in the amazon list.**
 
 <img src="https://user-images.githubusercontent.com/66759228/120331124-0a0e2100-c320-11eb-8c32-2a11e754e44b.PNG">
 
