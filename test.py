@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 search_dict = {"Product Name": [], "Price": [], "Previous Price":[],
                "Rating": [], "Shipping": [], "Stock": [], "Coupon": []};
-specific_dict = {[]}
+# specific_dict = {[]}
 
 def amazon_search(query):
     op = webdriver.ChromeOptions()
@@ -153,4 +153,41 @@ def amazon_specific(url):
     # driver.close()
     # driver.quit()
 
-amazon_specific('https://www.amazon.com/Beginners-Quadcopter-Altitude-Trajectory-Toys-Light/dp/B08TRF2H6N/ref=sr_1_1_sspa?dchild=1&keywords=drone&qid=1622619408&sr=8-1-spons&psc=1&smid=A32I8WIBPR7WGY&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyVUlJRDZOVFJOTEpVJmVuY3J5cHRlZElkPUEwNDk1NDMyMUcwOUtRSktLQkFPNiZlbmNyeXB0ZWRBZElkPUEwMjMwNDA2MUlENE5aOVNQRDdSMyZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=')
+def amazon_deals():
+    # op = webdriver.ChromeOptions()
+    # op.add_argument('headless')
+    # driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.get('https://www.amazon.com')
+    search_box = driver.find_element_by_xpath('//*[@id="nav-xshop"]/a[1]')
+    search_box.send_keys(Keys.ENTER)
+    sleep(5)
+    result = driver.find_elements_by_xpath('//*[@class="a-row dealContainer dealTile"]')
+    print(result)
+    for item in result:
+        try:
+            # Product title
+            title = item.find_element_by_xpath('.//a[contains(@id, "dealTitle")]//span[contains(@class, "a-declarative")]').get_attribute('innerText')
+            # specific_dict.setdefault("Product Name", []).append(title)
+            print(title)
+
+            # Rating
+            try:
+                price = item.find_element_by_xpath('.//span[contains(@class, "gb-font-size-medium inlineBlock unitLineHeight dealPriceText")]').get_attribute('innerText')
+                print(price)
+                deals_dict.setdefault("Price", []).append(rating)
+            except:
+                print('No Rating')
+                deals_dict.setdefault("Price", []).append('Price not available')
+
+
+            print('')
+
+        except:
+            print('error')
+
+    # driver.close()
+    # driver.quit()
+
+amazon_deals()

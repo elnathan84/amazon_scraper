@@ -5,6 +5,7 @@ import pandas as pd
 
 search_dict = {"Product Name": [], "Discounted Price": [], "Previous Price": [], "Rating": [], "Shipping": [], "Stock": [], "Coupon": []};
 specific_dict = {"Product Name": [], "Rating": [], "Price": [], "Seller": [], "Availability": [], "Shipping": [], "Other Information":[]};
+deals_dict = {"Product": [], "Price": [], "Time Left": [], "Number of Ratings":[], "Deal Type":[]};
 picture = []
 
 
@@ -185,6 +186,67 @@ def amazon_specific(url):
             except:
                 print('Shipping not available')
                 specific_dict.setdefault("Other Information", []).append('Shipping not available')
+
+            print('')
+
+        except:
+            print('error')
+
+    # driver.close()
+    # driver.quit()
+
+def amazon_deals():
+    # op = webdriver.ChromeOptions()
+    # op.add_argument('headless')
+    # driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.get('https://www.amazon.com')
+    search_box = driver.find_element_by_xpath('//*[@id="nav-xshop"]/a[1]')
+    search_box.send_keys(Keys.ENTER)
+    sleep(5)
+    result = driver.find_elements_by_xpath('//*[@class="a-row dealContainer dealTile"]')
+    print(result)
+    for item in result:
+        try:
+            # Product title
+            title = item.find_element_by_xpath('.//a[contains(@id, "dealTitle")]//span[contains(@class, "a-declarative")]').get_attribute('innerText')
+            deals_dict.setdefault("Product", []).append(title)
+            print(title)
+
+            # Price
+            try:
+                price = item.find_element_by_xpath('.//span[contains(@class, "gb-font-size-medium inlineBlock unitLineHeight dealPriceText")]').get_attribute('innerText')
+                print(price)
+                deals_dict.setdefault("Price", []).append(price)
+            except:
+                print('No Rating')
+                deals_dict.setdefault("Price", []).append('Price not available')
+            # Hours left
+            try:
+                time = item.find_element_by_xpath('.//span[contains(@role, "timer")]').get_attribute('innerText')
+                print(time)
+                deals_dict.setdefault("Time Left", []).append('Ends in ' + time)
+            except:
+                print('No Time')
+                deals_dict.setdefault("Time Left", []).append('Time till deal cut off not available')
+            # Number of Ratings
+            try:
+                rate = item.find_element_by_xpath('.//span[contains(@class, "a-size-small a-color-base")]').get_attribute('innerText')
+                print(rate)
+                deals_dict.setdefault("Number of Ratings", []).append(f'Rated by {rate} users')
+            except:
+                print('No. of ratings not available')
+                deals_dict.setdefault("Number of Ratings", []).append('No. of ratings not available')
+            # Deal of the Day
+            try:
+                deal = item.find_element_by_xpath('.//span[contains(@class, "a-size-mini a-color-base dotdBadge")]').get_attribute('innerText')
+                print(deal)
+                deals_dict.setdefault("Deal Type", []).append('Prime ' + deal)
+            except:
+                print('Amazon Deal')
+                deals_dict.setdefault("Deal Type", []).append('Amazon Deal')
+
 
             print('')
 

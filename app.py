@@ -1,7 +1,7 @@
 import streamlit as st
 import csv
 import numpy as np
-from amazon_scraper import amazon_search, search_dict, amazon_specific, specific_dict, picture
+from amazon_scraper import amazon_search, search_dict, amazon_specific, specific_dict, picture, amazon_deals, deals_dict
 import pandas as pd
 import time
 import base64
@@ -74,6 +74,40 @@ def load_specificdata():
     href = f'<a href="data:file/csv;base64,{b64}" download="amazon_pd.csv">Product Data</a>'
     st.markdown(href, unsafe_allow_html=True)
 
+
+def load_dealsdata():
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+
+    for i in range(100):
+        # Update progress bar.
+        progress_bar.progress(i + 1)
+
+        # Update status text.
+        status_text.text('Loading')
+
+        # Doing computation, wink wink
+        time.sleep(0.01)
+
+        while i == 50:
+            with st.spinner("The angels are scraping..."):
+                amazon_deals()
+            st.success('We have returned with glorious data!')
+            df = pd.DataFrame.from_dict(deals_dict)
+            # df = df.drop(df.index[7])
+            # dfr = df.reset_index(drop=True)
+            progress_bar.progress(i + 1)
+            i += 1
+    status_text.empty()
+    st.balloons()
+    st.dataframe(df)
+
+    csv = df.to_csv(index=True)
+    b64 = base64.b64encode(csv.encode()).decode()
+    st.markdown('### **⬇️ Download CSV File **')
+    href = f'<a href="data:file/csv;base64,{b64}" download="amazon_deals.csv">Amazon Deals</a>'
+    st.markdown(href, unsafe_allow_html=True)
+
 # Webapp
 st.set_page_config(page_title = "Amazon Webscraper")
 
@@ -104,8 +138,9 @@ if select_input == "Product URL":
 
         # placeholder(text)
 elif select_input == "Amazon Today's Deals":
-    st.button('Show Me!')
-
+    if st.button('Show Me!'):
+        load_dealsdata()
+        deals_dict.clear()
 else:
     text = st.text_area("Search Amazon")
     if st.button("Scrape It!"):
