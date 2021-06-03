@@ -3,7 +3,7 @@
  Webscrape Amazon through Amazon Search, Product URL, or Today's Deals Products. <br/>You can also get the csv file by clicking the download link after scrapping process.
  ## The Developers
  This program was created by:<br/>
- Back-end Developer _**Elnathan John Salvarria**_ <br/>
+ Back-end Developer _**Elnathan John Salavarria**_ <br/>
  Front-end Developer _**Kynch Tito Silao**_<br/>
  Front-end Developer _**Kizzel Mae Tulog**_<br/>
 <div align="center"><img src="https://user-images.githubusercontent.com/66759228/120319848-096f8d80-c314-11eb-8b74-8cfe9854c06c.png" width="200" height="200"><img src="https://user-images.githubusercontent.com/66759228/120319841-07a5ca00-c314-11eb-9d74-4ce316da5975.png" width="200" height="200"><img src="https://user-images.githubusercontent.com/66759228/120319736-eba22880-c313-11eb-9922-932aa34ad84f.png" width="200" height="200"></div>
