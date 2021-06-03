@@ -93,7 +93,7 @@ def amazon_search(query):
                     search_dict.setdefault("Stock", []).append('In stock')
                 # Coupon
                 try:
-                    coupon = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-base a-text-beside-button a-text-bold"]').get_attribute('innerText')
+                    coupon = item.find_element_by_xpath('.//span[@class="a-size-base s-highlighted-text-padding aok-inline-block s-coupon-highlight-color"]').get_attribute('innerText')
                     print(coupon + ' with coupon')
                     search_dict.setdefault("Coupon", []).append(coupon + ' with coupon')
                 except:

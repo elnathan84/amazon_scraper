@@ -21,7 +21,7 @@ def amazon_search(query):
     dup_check = ""
     result = driver.find_elements_by_xpath('//*[@class="sg-col-inner"]')
 
-    for item in result[3:]:
+    for item in result[]:
         try:
             # checks the search result output
             try:
