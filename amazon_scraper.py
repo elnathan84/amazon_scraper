@@ -150,9 +150,9 @@ def amazon_specific(url):
             # Availability
             try:
                 try:
-                    availability = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-success"]').get_attribute('innerText')
+                    availability = item.find_element_by_xpath('.//div[@class="a-section a-spacing-base"]//span[@class="a-size-medium a-color-price"]').get_attribute('innerText')
                 except:
-                    availability = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-state"]').get_attribute('innerText')
+                    availability = item.find_element_by_xpath('.//span[@class="a-size-medium a-color-success"]').get_attribute('innerText')
                 print(availability)
                 specific_dict.setdefault("Availability", []).append(availability)
             except:
@@ -184,8 +184,8 @@ def amazon_specific(url):
                 info = type + type_sub
                 specific_dict.setdefault("Other Information", []).append(info)
             except:
-                print('Shipping not available')
-                specific_dict.setdefault("Other Information", []).append('Shipping not available')
+                print('No other information')
+                specific_dict.setdefault("Other Information", []).append('No other information')
 
             print('')
 
